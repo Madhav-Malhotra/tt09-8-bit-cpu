@@ -1,10 +1,10 @@
 /*
  * Copyright (c) 2024 WAT.ai Chip Team
  * SPDX-License-Identifier: Apache-2.0
- * Implements SN74173 4-bit D-register
+ * Implements SN74LS173 4-bit D-register
  */
 
-module d_register (
+module d_register_4b (
     input CLR,              // Asynchronous clear output to digital low
     input CLK,              // Clock input
     input G1_n,             // Gate enable 1/2 (active low)
