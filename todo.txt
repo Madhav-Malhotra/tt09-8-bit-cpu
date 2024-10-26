@@ -1,5 +1,5 @@
 Mariam:
-- Need to finish the RAM (ram)
+-  (DONE) Need to finish the RAM (ram)
 
 Madhav: 
 - Ensure all the basic modules have been finished
