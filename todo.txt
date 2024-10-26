@@ -3,7 +3,7 @@ Mariam:
 
 Madhav: 
 - Ensure all the basic modules have been finished
-- 2-4 line decoder 3-8 line decoder (control logic)
+- 2-4 line decoder, 3-8 line decoder (control logic)
 
 Mister Jaidon:
 - Check ram/RAM and pc/counter
