@@ -3,5 +3,5 @@ Mariam:
 
 Madhav: 
 - Ensure all the basic modules have been finished
-    - dual J/K flip-flop, 2-4 line decoder, 8-bit d-reg, EEPROM (seems optional/unused??)
+    - dual J/K flip-flop, 2-4 line decoder, 8-bit d-reg,
     - 3-8 line decoder (control logic)
