@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2024 WAT.ai Chip Team
  * SPDX-License-Identifier: Apache-2.0
- * Implements N-bit look-ahead carry adder (for DM74LS283 4-bit, )
+ * Implements N-bit look-ahead carry adder (for DM74LS283 4-bit)
  */
 
 module adder #(
