@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2024 WAT.ai Chip Team
+ * SPDX-License-Identifier: Apache-2.0
+ * Implements ALU logic
+ */
+
+
 module top_level_alu(
    input wire [7:0] A,    // 8-bit input A
     input wire [7:0] B,    // 8-bit input B
@@ -47,12 +54,13 @@ wire int_d;
 
     assign bus_in = {S2, S1};
 
-bus_transceiver bus() (
+bus_transceiver bus (
     .OE_n(E0),
     .DIR(1),
     .A(bus_in),
     .B(BUS)
 );
+
 wire [3:0] intermediate_nor;
 wire [1:0] intermediate_and;
 
@@ -69,7 +77,7 @@ quad_nor nor_s1_1 (
     .y(intermediate_nor[1])
 );
 
-quad_nor nor_s2_1 (
+quad_nor nor_s2_0 (
     .a(S2[0]),
     .b(S2[1]),
     .y(intermediate_nor[2])
@@ -97,18 +105,6 @@ quad_and and_and (
     .a(intermediate_and[0]),
     .b(intermediate_and[1]),
     .y(int_d)
-);
-
-
-module d_register_4b (
-    input CLR,              // Asynchronous clear output to digital low
-    input CLK,              // Clock input
-    input G1_n,             // Gate enable 1/2 (active low)
-    input G2_n,             // both must be low for data load
-    input M,                // Both M/N must be low to enable output
-    input N,                // Else, we get high-impedance output
-    input [3:0] D,          // Data input
-    output reg [3:0] Q      // Saved state
 );
 
 
