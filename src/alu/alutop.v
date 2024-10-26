@@ -105,7 +105,9 @@ module top_level_alu(
         .y(int_d)
     );
 
-    d_register_4b d_reg (
+    d_register #(
+        .WIDTH(4)
+    ) d_reg_4 (
         .CLR(CLR),
         .CLK(CLK),
         .G1_n(FI),    //E1
