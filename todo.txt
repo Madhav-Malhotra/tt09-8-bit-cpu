@@ -1,0 +1,9 @@
+Mariam:
+- Finish the ALU implementation using standard modules in common/alu folder
+
+Madhav: 
+- Ensure all the basic modules have been finished
+    - Need to finish the RAM (ram)
+    - 4-bit counter (PC)
+    - dual J/K flip-flop, 2-4 line decoder, 8-bit d-reg, EEPROM (seems optional/unused??)
+    - 3-8 line decoder (control logic)
