@@ -9,28 +9,27 @@ module ram_74189 (
     input wire WE,          // Active low write enable
     input wire [3:0] A,     // Address inputs
     input wire [3:0] D,     // Data inputs
-    output wire [3:0] O     // Data outputs (3-STATE)
+    output reg [3:0] O     // Data outputs (3-STATE)
 );
 
     //internal memory - 16 words, 4 bits each = 64 
     reg [3:0] memory [0:15];
-    // intermediate data output
-    reg [3:0] data_out;
-    
-    
+ 
     always @(*) begin
-        // Write
-        if (!CS && !WE) begin
-            memory[A] <= D;
+        // default value
+        //set all mem to 0 
+        
+        if (!CS && WE) begin
+            O = memory[A];
+        end else begin
+            if (!CS && !WE) begin
+            memory[A] = D;
+            end
+            O = 4'bz;
         end
-        //read
-        else if (!CS && WE) begin
-            data_out = memory[A];
-        end
+        
     end
     
 
-    // Output control - complemented data with 3-STATE control
-    assign O = (!CS && WE) ? ~data_out : 4'bz;
 
 endmodule
