@@ -5,13 +5,17 @@
  */
 
 module decoder_3b (
-  input wire g1, g2a, g2b, a, b, c,
-  output wire [7:0] y
+  input wire g1, // active high enable
+  input g2a, // active low enable
+  input g2b, // active low enable
+  input a, b, c, // select pins
+  output wire [7:0] y // active low output
 );
 
   wire enable;
-  assign enable = (g1 == 1'b1 ||( g2a == 1'b0 && g2b == 1'b0));
+  assign enable = (g1 == 1'b1 ||( g2a == 1'b0 && g2b == 1'b0)); // active if all enables are active
 
+  // assign y active low decoded output
   assign y = enable ? (
                 ( {a, b, c} == 3'b000) ? 8'b11111110 :
                 ( {a, b, c} == 3'b001) ? 8'b11111101 :
