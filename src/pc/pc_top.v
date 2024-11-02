@@ -7,9 +7,9 @@
 module pc_top (
     input wire clk,             // clock input
     inout wire [3:0] bus,       // inout for sending or receiving instr idx
-    input wire clr_n,           // 
-    input wire ce,              //
-    input wire j,               //
+    input wire clr_n,           // clears counter (active low)
+    input wire ce,              // count enable (active high)
+    input wire j_n,             // load enable (active low)
     input wire co_n             // output enable (opposite of clear output)
 );
     wire [3:0] bus_internal;
@@ -21,7 +21,14 @@ module pc_top (
         .B({ {4{1'b0}}, bus_internal[0:3] })
     );
 
+    counter_4b counter_4b_A (
+        .p_en(ce),  // both p_en and t_en must be digital high to start count
+        .t_en(ce),
+        .ld_n(j_n), // load enable
+        .clk(clk),
+        .clr_n(clr_n),
+        .data_in(bus[0:3]),
+        .data_out(bus_internal[0:3])
+    );
     
-    
-
 endmodule
