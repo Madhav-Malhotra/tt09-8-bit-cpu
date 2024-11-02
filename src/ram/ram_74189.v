@@ -20,7 +20,7 @@ module ram_74189 (
         //set all mem to 0 
         
         if (!CS && WE) begin
-            O = memory[A];
+            O = ~memory[A];
         end else begin
             if (!CS && !WE) begin
             memory[A] = D;
