@@ -42,7 +42,7 @@ module top_level_alu(
         .B(b_xor[3:0]),
         .C0(SU),            // Use SU as a carry-in for addition or subtraction
         .S(S1),
-        .C4(C4)             // Connect to C0 of the second adder
+        .CN(C4)             // Connect to C0 of the second adder
     );
 
     // Instantiate second 4-bit adder
@@ -51,7 +51,7 @@ module top_level_alu(
         .B(b_xor[7:4]),
         .C0(C4),            // Connect C4 from the first adder
         .S(S2),
-        .C4(CF)             // Carry out from second adder
+        .CN(CF)             // Carry out from second adder
     );
 
     assign bus_in = {S2, S1};
