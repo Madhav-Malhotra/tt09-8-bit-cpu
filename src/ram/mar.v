@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2024 WAT.ai Chip Team
+ * SPDX-License-Identifier: Apache-2.0
+ * Implements Memory Address Register (MAR)
+ */
+
 module mar (
  	  input wire [3:0] d_in,    
     input wire [3:0] pc_in,    // 4-bit program counter input
