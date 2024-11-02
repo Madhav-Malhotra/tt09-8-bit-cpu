@@ -13,7 +13,7 @@ module decoder_3b (
 );
 
   wire enable;
-  assign enable = (g1 == 1'b1 ||( g2a == 1'b0 && g2b == 1'b0)); // active if all enables are active
+  assign enable = (g1 == 1'b1 &&( g2a == 1'b0 && g2b == 1'b0)); // active if all enables are active
 
   // assign y active low decoded output
   assign y = enable ? (
