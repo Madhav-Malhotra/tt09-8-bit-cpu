@@ -17,8 +17,10 @@ module regAB_top (
     bus_transceiver bus_transceiver_A (
         .OE_n(ao_n),
         .DIR(1'b1),
-        .A(A_internal[0:7]),
-        .B(bus[0:7])
+        .A({A_internal[0], A_internal[1], A_internal[2], A_internal[3],
+            A_internal[4], A_internal[5], A_internal[6], A_internal[7]}),
+        .B({bus[0], bus[1], bus[2], bus[3],
+            bus[4], bus[5], bus[6], bus[7]})
     );
 
     d_register d_register_A (
@@ -28,7 +30,7 @@ module regAB_top (
         .G2_n(ai_n),
         .M(1'b0),
         .N(1'b0),
-        .D(bus[4:7]),
+        .D({bus[4], bus[5], bus[6], bus[7]}),
         .Q(A_internal[3:0])
     );
 
@@ -39,7 +41,7 @@ module regAB_top (
         .G2_n(ai_n),
         .M(1'b0),
         .N(1'b0),
-        .D(bus[0:3]),
+        .D({bus[0], bus[1], bus[2], bus[3]}),
         .Q(A_internal[7:4])
     );
 
