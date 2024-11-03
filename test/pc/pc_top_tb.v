@@ -31,27 +31,35 @@ module pc_top_tb;
     end
 
     initial begin
+        // Dump waves
+    	$dumpfile("dump.vcd");
+   	 	$dumpvars(1);
+      
         // 1. Clear Counter Test
         clr_n = 0; ce = 1; j_n = 1; co_n = 1;
         #10;
         clr_n = 1; // Release clear
+      $display("Finished clear test");
 
         // 2. Increment Counter Test
         ce = 1; j_n = 1;
         #50; // Observe multiple clock cycles for counting
+      $display("Finished counting");
 
         // 3. Load Value Test
         ce = 0; j_n = 0;
       	bus_driver = 4'b0101;
         #10; // Set desired bus value here
         j_n = 1; // Release load
+      $display("Finished loading");
 
         // 4. Output Enable Test
         co_n = 0; #10;				// output should be high impedance
         co_n = 1; #10;				// output should be normal
+      $display("Finished output enable check");
 
         // Finish simulation
-        $stop;
+        $finish;
     end
 
 endmodule
