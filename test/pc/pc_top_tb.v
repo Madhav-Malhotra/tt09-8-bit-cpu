@@ -7,7 +7,7 @@ module pc_top_tb;
     reg clr_n;			// resets program counter to 0
   	reg ce;				// count enable (program counter increments)
   	reg j_n;			// load enable (active low)
-  	reg co_n;			// output enable (active high) = clear output (active low)
+  	reg co_n;			// output enable (active low)
     wire [3:0] bus;
   	reg [3:0] bus_driver; // Register to drive values onto bus conditionally
   
@@ -33,30 +33,44 @@ module pc_top_tb;
     initial begin
         // Dump waves
     	$dumpfile("dump.vcd");
-   	 	$dumpvars(1);
+      	$dumpvars(0, pc_top_tb);
       
         // 1. Clear Counter Test
-        clr_n = 0; ce = 1; j_n = 1; co_n = 1;
-        #10;
-        clr_n = 1; // Release clear
-      $display("Finished clear test");
+        clr_n = 0; ce = 1; j_n = 1; co_n = 0; 
+        bus_driver = 4'b1010; 		// no effect, just don't float
+        #10; 	   					// should see bus_internal = 0
+        clr_n = 1; 					// Release clear
+      	$display("Finished clear test");
 
         // 2. Increment Counter Test
         ce = 1; j_n = 1;
-        #50; // Observe multiple clock cycles for counting
-      $display("Finished counting");
+        #40; // Should see bus_internal = 1, 2, 3, 4, ...
+      	$display("Finished counting");
+      
+      	// Reset for load value
+      	clr_n = 0; ce = 0;
+        #10;
+      	clr_n = 1;
+      	#10;
 
         // 3. Load Value Test
-        ce = 0; j_n = 0;
-      	bus_driver = 4'b0101;
-        #10; // Set desired bus value here
-        j_n = 1; // Release load
-      $display("Finished loading");
+        j_n = 0;
+      	bus_driver = 4'b1110;		// Set desired bus_internal
+        #10; 						
+        j_n = 1; 					// Release load
+      	#10;
+      	$display("Finished loading");
+      
+      	// Overflow test
+      	ce = 1;
+      	#20;						// should see carry overflow
+      	ce = 0;
+      	#10;
 
         // 4. Output Enable Test
-        co_n = 0; #10;				// output should be high impedance
-        co_n = 1; #10;				// output should be normal
-      $display("Finished output enable check");
+        co_n = 1; #10;				// bus should be high impedance
+        co_n = 0; #10;				// bus should be normal
+      	$display("Finished output enable check");
 
         // Finish simulation
         $finish;
