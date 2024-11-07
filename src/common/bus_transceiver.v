@@ -10,6 +10,9 @@ module bus_transceiver (
     inout [7:0] A,      // Port A (8-bits)
     inout [7:0] B       // Port B (8-bits)
 );
-    assign A = ~OE_n ? (~DIR ? B : A) : 8'bz;
-    assign B = ~OE_n ? (DIR ? A : B) : 8'bz;
+    // Drive A when OE_n is 0 and DIR is 0 (B to A transfer)
+    assign A = (~OE_n && DIR == 0) ? B : 8'bz;
+
+    // Drive B when OE_n is 0 and DIR is 1 (A to B transfer)
+    assign B = (~OE_n && DIR == 1) ? A : 8'bz;
 endmodule
